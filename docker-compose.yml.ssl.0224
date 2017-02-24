@@ -1,0 +1,30 @@
+version: '2'
+services:
+  mongo:
+    image: "mongo:3"
+    volumes:
+      - /var/graylog/data/mongo:/data/db
+  elasticsearch:
+    image: "elasticsearch:2"
+    command: "elasticsearch -Des.cluster.name='graylog'"
+    volumes:
+      - /var/graylog/data/elasticsearch:/usr/share/elasticsearch/data
+  graylog:
+    image: graylog2/server:2.1.2-1
+    volumes:
+      - /var/graylog/data/journal:/usr/share/graylog/data/journal
+      - /var/graylog/config:/usr/share/graylog/data/config
+      - /var/graylog/security:/var/graylog/security
+      - /var/graylog/security:/etc/ssl/certs/java
+    environment:
+      GRAYLOG_PASSWORD_SECRET: somepasswordpepper
+      GRAYLOG_ROOT_PASSWORD_SHA2: 8689deb9a6a6db7f5d6d23369d84951af4be3aef677b9290f1488ce27e874e5d
+      GRAYLOG_WEB_ENDPOINT_URI: https://cd-eps-034.nhsrx.com:9000/api
+      GRAYLOG_REST_TRANSPORT_URI: https://cd-eps-034.nhsrx.com:9000/api
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+        - "9000:9000"
+        - "12900:12900"
+        - "12202:12202"
