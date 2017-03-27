@@ -1,0 +1,12 @@
+2)	On the client side for the graylog collector update the config/collector.conf and restart the graylog collector.
+a)	server-url = https://cd-eps-034.nhsrx.com:9000/api
+b)	outputs {
+  // GELF output to send messages to a Graylog server. Usually only type, host and port are needed.
+  // The other options are for TLS support and to fine-tune the GELF client library.
+  gelf-tcp {
+    type = "gelf"
+    host = "cd-eps-034.nhsrx.com"
+    port = 12201
+    client-tls = true
+    client-tls-cert-chain-file = "/home/lcheeran/cert/graylog_certificate.pem"
+    client-tls-verify-cert = true
