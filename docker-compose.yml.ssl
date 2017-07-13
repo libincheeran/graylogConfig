@@ -12,12 +12,12 @@ services:
     ports:
       - "9200:9200"
   graylog:
-    image: graylog2/server:2.1.2-1
+    image: graylog2/server:2.2.3-1
     volumes:
       - /var/graylog/data/journal:/usr/share/graylog/data/journal
       - /opt/graylog/config:/usr/share/graylog/data/config
       - /opt/graylog/security:/opt/graylog/security
-      - /opt/graylog/plugins:/usr/share/graylog/plugin
+      #- /opt/graylog/plugins:/usr/share/graylog/plugin
       - /opt/graylog/security:/etc/ssl/certs/java
     environment:
       GRAYLOG_PASSWORD_SECRET: somepasswordpepper
@@ -30,6 +30,7 @@ services:
       GRAYLOG_TRANSPORT_EMAIL_USE_AUTH: "false"
       GRAYLOG_TRANSPORT_EMAIL_USE_TLS: "false"
       GRAYLOG_TRANSPORT_EMAIL_USE_SSL: "false"
+      GRAYLOG_SERVER_JAVA_OPTS: "-Xms1g -Xmx2g -XX:NewRatio=1 -XX:MaxMetaspaceSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow -Djavax.net.ssl.trustStore=/opt/graylog/security/adKeyStore.jks -Djavax.net.ssl.trustStorePassword=changeme"
 
     depends_on:
       - mongo
@@ -38,3 +39,4 @@ services:
         - "9000:9000"
         - "12900:12900"
         - "12201-12209:12201-12209"
+
