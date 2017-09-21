@@ -1,0 +1,1 @@
+docker run -d -p 5601:5601 -v /home/svc-graylog/kibana/config:/opt/kibana/config -v /home/svc-graylog/kibana/security/://home/svc-graylog/kibana/security/ kibana:4.6.4
