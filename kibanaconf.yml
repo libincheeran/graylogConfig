@@ -1,0 +1,4 @@
+# These were the only changes done on kibana.yml
+elasticsearch.url: 'http://cd-eps-034:9200'
+server.ssl.cert: /home/svc-graylog/kibana/security/cert.pem
+server.ssl.key: /home/svc-graylog/kibana/security/server.key
