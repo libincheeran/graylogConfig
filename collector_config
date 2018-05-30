@@ -5,7 +5,7 @@ b)	outputs {
   // The other options are for TLS support and to fine-tune the GELF client library.
   gelf-tcp {
     type = "gelf"
-    host = "cd-eps-034.nhsrx.com"
+    host = ".com"
     port = 12201
     client-tls = true
     client-tls-cert-chain-file = "/home/lcheeran/cert/graylog_certificate.pem"
